@@ -1,23 +1,9 @@
-from flask import render_template, request, redirect, url_for, current_app, session
+from flask import render_template, request, redirect, url_for
+from validators.decorator import group_required
 from . import bp_query, provider, forms
 from model.model_route import model_route
 from database.DBoperation import select
 
-
-def group_required(func):
-	from functools import wraps
-	@wraps(func)
-	def wrapper(*args, **kwargs):
-		if 'user_group' in session:
-			access = current_app.config['db_access']
-			user_request = request.endpoint.split('.')[0]
-			user_role=session.get('user_group')
-			if user_role in access and user_request in access[user_role]:
-				return func(*args, **kwargs)
-			else:
-				return "Permission denied"
-		return "Need to auth"
-	return wrapper
 
 params_title = ('year', 'month', 'm_id')
 

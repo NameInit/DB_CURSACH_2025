@@ -1,7 +1,8 @@
 from flask import render_template, request, redirect, url_for, session
 from model.model_route import model_route
 from database.DBoperation import select, insert
-from . import bp_auth, provider, cleaner
+from validators.str import cleaner
+from . import bp_auth, provider
 
 
 @bp_auth.route('/', methods=['GET', 'POST'])
