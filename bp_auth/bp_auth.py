@@ -1,11 +1,8 @@
-from flask import render_template, request, redirect, url_for, session, current_app
-from .model.model_route import model_route
-from .database.DBoperation import select, insert
-from . import bp_auth, provider
+from flask import render_template, request, redirect, url_for, session
+from model.model_route import model_route
+from database.DBoperation import select, insert
+from . import bp_auth, provider, cleaner
 
-def cleaner(s: str):
-    import re
-    return re.sub(r'[^a-zA-Z0-9_]', '', s)
 
 @bp_auth.route('/', methods=['GET', 'POST'])
 def auth_handler():

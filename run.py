@@ -1,4 +1,4 @@
-import subprocess
+from main_menu.main_menu import app
 
-if __name__ == "__main__":
-    subprocess.run(["python3", "-m", "main_menu.main_menu"])
+if __name__=='__main__':
+	app.run(host="127.0.0.1", port=5000, debug=True)
