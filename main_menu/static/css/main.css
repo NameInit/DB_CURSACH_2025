@@ -1,0 +1,161 @@
+/* Общие стили */
+body {
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 20px;
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden; /* Убираем скролл */
+}
+
+h1 {
+    color: #2c3e50;
+    text-align: center;
+    margin-bottom: 40px;
+    border-bottom: 3px solid #3498db;
+    padding-bottom: 15px;
+    font-size: 2.2em;
+}
+
+/* Стили для главного меню */
+.menu-container {
+    background: white;
+    padding: 40px; /* Уменьшил padding */
+    border-radius: 15px;
+    box-shadow: 0 10px 30px rgba(0,0,0,0.2);
+    width: 100%;
+    max-width: 450px; /* Уменьшил максимальную ширину */
+    max-height: 90vh; /* Ограничиваем высоту */
+    overflow: hidden; /* Убираем скролл внутри контейнера */
+}
+
+.menu-container h1 {
+    margin-bottom: 30px; /* Уменьшил отступ */
+    font-size: 1.8em; /* Уменьшил размер шрифта */
+}
+
+/* Колонка с кнопками по центру */
+.menu-column {
+    display: flex;
+    flex-direction: column;
+    gap: 15px; /* Уменьшил расстояние между кнопками */
+    align-items: center;
+    width: 100%;
+}
+
+.menu-btn {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    gap: 12px;
+    padding: 16px 25px; /* Уменьшил padding */
+    background: linear-gradient(135deg, #3498db, #2980b9);
+    color: white;
+    text-decoration: none;
+    border: none;
+    border-radius: 12px;
+    font-weight: 600;
+    font-size: 16px; /* Уменьшил размер шрифта */
+    cursor: pointer;
+    transition: all 0.3s ease;
+    box-shadow: 0 4px 15px rgba(52, 152, 219, 0.3);
+    text-align: center;
+    width: 100%;
+    max-width: 280px; /* Уменьшил ширину кнопок */
+    min-height: 50px; /* Уменьшил высоту кнопок */
+}
+
+.menu-btn:hover {
+    transform: translateY(-3px);
+    box-shadow: 0 8px 25px rgba(52, 152, 219, 0.4);
+    background: linear-gradient(135deg, #2980b9, #2471a3);
+}
+
+/* Стили для новых кнопок */
+.reports-btn {
+    background: linear-gradient(135deg, #9b59b6, #8e44ad);
+    box-shadow: 0 4px 15px rgba(155, 89, 182, 0.3);
+}
+
+.reports-btn:hover {
+    background: linear-gradient(135deg, #8e44ad, #7d3c98);
+    box-shadow: 0 8px 25px rgba(155, 89, 182, 0.4);
+}
+
+.cart-btn {
+    background: linear-gradient(135deg, #27ae60, #229954);
+    box-shadow: 0 4px 15px rgba(39, 174, 96, 0.3);
+}
+
+.cart-btn:hover {
+    background: linear-gradient(135deg, #229954, #1e8449);
+    box-shadow: 0 8px 25px rgba(39, 174, 96, 0.4);
+}
+
+.exit-btn {
+    background: linear-gradient(135deg, #e74c3c, #c0392b);
+    box-shadow: 0 4px 15px rgba(231, 76, 60, 0.3);
+    margin-top: 10px;
+}
+
+.exit-btn:hover {
+    background: linear-gradient(135deg, #c0392b, #a93226);
+    box-shadow: 0 8px 25px rgba(231, 76, 60, 0.4);
+}
+
+/* Адаптивность */
+@media (max-width: 768px) {
+    body {
+        padding: 10px;
+        overflow: hidden; /* Убираем скролл на мобильных */
+    }
+    
+    .menu-container {
+        padding: 25px 15px;
+        max-width: 350px;
+        max-height: 85vh;
+    }
+    
+    h1 {
+        font-size: 1.6em;
+        margin-bottom: 25px;
+    }
+    
+    .menu-btn {
+        padding: 14px 20px;
+        font-size: 14px;
+        max-width: 240px;
+        min-height: 45px;
+    }
+    
+    .menu-column {
+        gap: 12px;
+    }
+}
+
+/* Для очень маленьких экранов */
+@media (max-height: 700px) {
+    .menu-container {
+        padding: 20px 15px;
+        max-height: 95vh;
+    }
+    
+    .menu-container h1 {
+        margin-bottom: 20px;
+        font-size: 1.5em;
+    }
+    
+    .menu-btn {
+        padding: 12px 18px;
+        min-height: 40px;
+        font-size: 14px;
+    }
+    
+    .menu-column {
+        gap: 10px;
+    }
+}
