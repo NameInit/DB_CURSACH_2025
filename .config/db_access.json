@@ -1,5 +1,0 @@
-{
-	"admin": ["bp_auth", "bp_query"],
-	"manager": ["bp_auth"],
-	"pharmacist": ["bp_auth", "bp_query"]
-}

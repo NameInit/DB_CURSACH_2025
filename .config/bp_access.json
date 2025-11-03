@@ -1,0 +1,18 @@
+{
+	"admin": { 
+		"bp_query": "*",
+		"bp_report": "*"
+	},
+	"manager": { 
+		"bp_query": [],
+		"bp_report": "*"
+	},
+	"pharmacist": {
+		"bp_query": "*",
+		"bp_report": []
+	},
+	"user": {
+		"bp_query": [],
+		"bp_report": []
+	}
+}
