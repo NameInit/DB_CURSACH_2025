@@ -1,6 +1,6 @@
 from flask import session, render_template, request, redirect, url_for
 from model.model_route import model_route
-from database.DBoperation import select_dict
+from database.DBoperation import select_dict, tranzakt
 from validators.decorator import group_required
 from . import bp_basket, provider
 
@@ -79,8 +79,17 @@ def basket_order_handler():
 	if not basket:
 		return redirect(url_for('bp_basket.basket_main_handler'))
 
+	# model_route
+
 	order_id = len(basket) + 1000
-	
+	operation=['insert_user_order']
+	params=[[session['id']]]
+	for product_id in basket:
+		operation.append('insert_user_list_order')
+		params.append([basket[str(product_id)]['price']*basket[str(product_id)]['quantity'],product_id])
+
+	model_route(provider,params,operation,tranzakt)
+
 	session['basket'] = dict()
 	session.modified = True
 		

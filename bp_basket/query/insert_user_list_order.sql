@@ -1,0 +1,1 @@
+INSERT INTO user_list_order(ulo_amount,uo_id,m_id) VALUES(%s,(SELECT MAX(uo_id) FROM user_order),%s);
