@@ -19,10 +19,26 @@ def insert(sql:str, param_list:list=[])->bool:
 			cursor.execute(sql, param_list)
 			return True
 		
-def call(sql:str, param_list:list=[]):
+def call(sql:str, param_list:list=[]) -> bool:
 	with DBContextManager(current_app.config['db_config']) as cursor:
 		if cursor is None:
 			raise ValueError('Не могу подключиться к базе данных')
 		else:
 			cursor.execute(sql, param_list)
 			return message_to_bool(cursor.connection.notices[0].strip(), 'SUCCESS')
+		
+def select_dict(sql:str, param_list:list=[]) -> list[dict]:
+	with DBContextManager(current_app.config['db_config']) as cursor:
+		if cursor is None:
+			raise ValueError('Не могу подключиться к базе данных')
+		else:
+			cursor.execute(sql, param_list)
+			col_names=[item[0] for item in cursor.description]
+			results = []
+			for row in cursor.fetchall():
+				row_dict = {}
+				for i, col_name in enumerate(col_names):
+					row_dict[col_name] = row[i]
+				results.append(row_dict)
+
+			return results

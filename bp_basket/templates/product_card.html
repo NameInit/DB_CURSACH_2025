@@ -1,0 +1,29 @@
+<div class="product-card">
+    <div class="product-header">
+        <h3 class="product-name">{{ product.name }}</h3>
+        <span class="product-group">{{ product.group }}</span>
+    </div>
+    
+    <div class="product-details">
+        <div class="product-info">
+            <span class="info-label">🏷️ Группа:</span>
+            <span class="info-value">{{ product.group }}</span>
+        </div>
+        <div class="product-info">
+            <span class="info-label">🌍 Страна:</span>
+            <span class="info-value">{{ product.country }}</span>
+        </div>
+        <div class="product-info">
+            <span class="info-label">💰 Стоимость:</span>
+            <span class="info-value price">{{ product.price }} ₽</span>
+        </div>
+    </div>
+    
+    <div class="product-actions">
+        <form method="POST" action="{{ url_for('bp_basket.basket_add_handler', product_id=product.id) }}">
+            <button type="submit" class="btn-add-to-cart">
+                🛒 Добавить в корзину
+            </button>
+        </form>
+    </div>
+</div>

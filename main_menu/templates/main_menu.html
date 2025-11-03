@@ -12,7 +12,7 @@
         <div class="menu-column">
             <a href="{{ url_for('bp_query.query_menu_handler') }}" class="menu-btn">Меню запросов</a>
             <a href="{{ url_for('bp_report.report_menu_handler') }}" class="menu-btn reports-btn">Работа с отчётами</a>
-            <a class="menu-btn cart-btn">Корзина покупок</a>
+            <a href="{{ url_for('bp_basket.basket_main_handler') }}" class="menu-btn cart-btn">Корзина покупок</a>
             <a href="{{ url_for('exit_handler') }}" class="menu-btn exit-btn">Завершить сессию</a>
         </div>
     </div>
