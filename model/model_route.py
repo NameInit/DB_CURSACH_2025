@@ -11,5 +11,4 @@ class ResultInfo:
 def model_route(provider: SQLProvider, params: list, operation:str, operator)->ResultInfo:
 	query=provider.get(operation+'.sql')
 	res=operator(query,params)
-	return ResultInfo(res, True, '') if res else ResultInfo(res, False, 'Не найдены данные')
-	
+	return ResultInfo(res, True, '') if res else ResultInfo(res, False, 'Ошибка запроса')

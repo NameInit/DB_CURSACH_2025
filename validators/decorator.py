@@ -15,10 +15,10 @@ def group_required(func):
 	@wraps(func)
 	def wrapper(*args, **kwargs):
 		if 'user_group' in session:
-			access = current_app.config['db_access']
-			user_request = request.endpoint.split('.')[0]
+			bp_name,handler_name=request.endpoint.split('.')
+			access=current_app.config['bp_access']
 			user_role=session.get('user_group')
-			if user_role in access and user_request in access[user_role]:
+			if user_role in access and bp_name in access[user_role] and (handler_name in access[user_role][bp_name] or access[user_role][bp_name]=='*'):
 				return func(*args, **kwargs)
 			else:
 				return "Permission denied"

@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню запросов - Аптека</title>
+    <link rel="stylesheet" href="{{ url_for('bp_report.static', filename='css/report.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Меню отчётов - Аптека</h1>
+        
+        <div class="queries-grid">
+            <div class="query-card">
+                <h3>🗂️ Отчёт1</h3>
+                <p>Описание1</p>
+                <a href="{{ url_for('bp_report.report_form_handler', report_id=1) }}" class="btn btn-query">✏️ Создать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🗂️ Отчёт2</h3>
+                <p>Описание2</p>
+                <a href="{{ url_for('bp_report.report_form_handler', report_id=2) }}" class="btn btn-query">✏️ Создать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🗂️ Отчёт3</h3>
+                <p>Описание3</p>
+                <a href="{{ url_for('bp_report.report_form_handler', report_id=3) }}" class="btn btn-query">✏️ Создать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🗂️ Отчёт4</h3>
+                <p>Описание4</p>
+                <a href="{{ url_for('bp_report.report_form_handler', report_id=4) }}" class="btn btn-query">✏️ Создать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🗂️ Отчёт5</h3>
+                <p>Описание5</p>
+                <a href="{{ url_for('bp_report.report_form_handler', report_id=5) }}" class="btn btn-query">✏️ Создать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>📊 Посмотреть отчёт</h3>
+                <p>Описание6</p>
+                <a href="{{ url_for('bp_report.report_form_handler', report_id=6) }}" class="btn btn-query">📑 Посмотреть</a>
+            </div>
+        </div>
+                
+        <div class="action-buttons">
+            <a href="{{ url_for('main_menu_handler') }}" class="btn-back">
+                <span class="btn-icon">←</span>
+                <span class="btn-text">Назад в главное меню</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

@@ -1,0 +1,1 @@
+CALL report1(%s, %s);

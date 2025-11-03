@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Результат отчёта - Аптека</title>
+    <link rel="stylesheet" href="{{ url_for('bp_report.static', filename='css/report.css') }}">
+</head>
+<body>
+    <div class="result-container">
+        {% if success %}
+            <div class="result-icon success">✅</div>
+            <div class="result-message success">
+                <strong>Отчёт успешно составлен</strong>
+                <p>Отчёт был сохранён в системе и готов к просмотру</p>
+            </div>
+        {% else %}
+            <div class="result-icon error">❌</div>
+            <div class="result-message error">
+                <strong>Отчёт не составлен</strong>
+                <p>Возможно, отчёт за указанный период уже существует или произошла ошибка при создании</p>
+            </div>
+        {% endif %}
+        
+        <div class="result-buttons">
+            <a href="javascript:history.back()" class="btn btn-back-history">
+                <span class="btn-icon">←</span>
+                <span class="btn-text">Назад</span>
+            </a>
+            <a href="{{ url_for('bp_report.report_menu_handler') }}" class="btn btn-back-menu">
+                <span class="btn-icon">📋</span>
+                <span class="btn-text">В меню отчётов</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>
