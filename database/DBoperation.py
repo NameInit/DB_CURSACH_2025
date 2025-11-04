@@ -51,5 +51,4 @@ def tranzakt(list_sql:list[str], list_param_list:list[list]=[])->bool:
 			cursor.connection.autocommit=False
 			for i in range(len(list_sql)):
 				cursor.execute(list_sql[i], list_param_list[i])
-			cursor.connection.commit()
 			return True
