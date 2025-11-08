@@ -1,1 +1,1 @@
-SELECT * FROM internal_user WHERE name=%s AND password=%s;
+SELECT * FROM internal_user WHERE login=%s AND password=%s;

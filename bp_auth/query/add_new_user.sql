@@ -1,1 +1,1 @@
-INSERT INTO internal_user (name, password, r_id) VALUES (%s,%s,%s);
+INSERT INTO internal_user (login, password, r_id) VALUES (%s,%s,%s);

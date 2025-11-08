@@ -9,11 +9,11 @@ from . import bp_basket, provider
 def basket_main_handler():
 	res=model_route(provider, [], 'get_products', select_dict)
 	basket_items=session.get('basket') or {}
-
+	total = sum(float(item['price'])*int(item['quantity']) for item in basket_items.values())
 	return render_template('basket_main.html', 
 						 products=res.result, 
 						 basket_items=basket_items,
-						 total=sum(item['price']*item['quantity'] for item in basket_items.values()))
+						 total=total)
 
 @bp_basket.route('/add/<int:product_id>', methods=['POST'])
 @group_required
@@ -78,8 +78,6 @@ def basket_order_handler():
 	basket = session.get('basket') or {}
 	if not basket:
 		return redirect(url_for('bp_basket.basket_main_handler'))
-
-	# model_route
 
 	order_id = len(basket) + 1000
 	operation=['insert_user_order']
