@@ -1,0 +1,43 @@
+<div class="basket-item-card">
+    <div class="basket-item-header">
+        <h4 class="basket-item-name">{{ basket_items[item].name }}</h4>
+        <form method="POST" action="{{ url_for('bp_basket.basket_remove_handler', item_id=item) }}" style="display: inline;">
+            <button type="submit" class="btn-remove-item" title="Удалить из корзины">
+                🗑️
+            </button>
+        </form>
+    </div>
+    
+    <div class="basket-item-details">
+        <div class="basket-info">
+            <span class="basket-label">🏷️ Группа:</span>
+            <span class="basket-value">{{ basket_items[item].group }}</span>
+        </div>
+        <div class="basket-info">
+            <span class="basket-label">🌍 Страна:</span>
+            <span class="basket-value">{{ basket_items[item].country }}</span>
+        </div>
+        <div class="basket-info">
+            <span class="basket-label">💰 Цена за шт:</span>
+            <span class="basket-value price">{{ basket_items[item].price }} ₽</span>
+        </div>
+        <div class="basket-info">
+            <span class="basket-label">📦 Количество:</span>
+            <div class="quantity-controls">
+                <form method="POST" action="{{ url_for('bp_basket.basket_quantity_handler', item_id=item) }}" style="display: inline;">
+                    <input type="hidden" name="action" value="decrease">
+                    <button type="submit" class="btn-quantity minus">−</button>
+                </form>
+                <span class="quantity-display">{{ basket_items[item].quantity }} шт</span>
+                <form method="POST" action="{{ url_for('bp_basket.basket_quantity_handler', item_id=item) }}" style="display: inline;">
+                    <input type="hidden" name="action" value="increase">
+                    <button type="submit" class="btn-quantity plus">+</button>
+                </form>
+            </div>
+        </div>
+        <div class="basket-info">
+            <span class="basket-label">💵 Сумма:</span>
+            <span class="basket-value total-item-price">{{ "%.2f"|format(basket_items[item].price * basket_items[item].quantity) }} ₽</span>
+        </div>
+    </div>
+</div>

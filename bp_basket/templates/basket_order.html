@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Заказ оформлен - Аптека</title>
+    <link rel="stylesheet" href="{{ url_for('bp_basket.static', filename='css/order.css') }}">
+</head>
+<body>
+    <div class="container">
+        <div class="success-icon">✅</div>
+        <h1>Заказ успешно оформлен!</h1>
+        
+        <div class="message">
+            Спасибо за ваш заказ! Мы уже начали его обработку.
+        </div>
+        
+        <div class="order-info">
+            <div>Номер вашего заказа:</div>
+            <div class="order-number">#{{ order_id }}</div>
+            <div style="font-size: 14px; color: #666; margin-top: 10px;">
+                Сохранен в истории заказов
+            </div>
+        </div>
+        
+        <div class="message">
+            С вами свяжутся в ближайшее время для подтверждения заказа.
+        </div>
+        
+        <div class="buttons">
+            <a href="{{ url_for('main_menu_handler') }}" class="btn btn-secondary">
+                🏠 В главное меню
+            </a>
+            <a href="{{ url_for('bp_basket.basket_main_handler') }}" class="btn btn-primary">
+                🛒 Вернуться к покупкам
+            </a>
+        </div>
+    </div>
+</body>
+</html>

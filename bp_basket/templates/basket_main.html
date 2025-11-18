@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Корзина - Аптека</title>
+    <link rel="stylesheet" href="{{ url_for('bp_basket.static', filename='css/basket.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>🛒 Аптека - Выбор товаров</h1>
+        
+        <div class="basket-layout">
+            <!-- Левая часть - Товары -->
+            <div class="products-section">
+                <h2>📦 Доступные товары</h2>
+                <div class="products-scroll-container">
+                    <div class="products-grid">
+                        {% for product in products %}
+                            {% include 'product_card.html' %}
+                        {% endfor %}
+                    </div>
+                </div>
+            </div>
+            
+            <!-- Правая часть - Корзина -->
+            <div class="basket-section">
+                <div class="basket-sidebar">
+                    <h2>🛍️ Ваша корзина</h2>
+                    
+                    <!-- Статистика корзины -->
+                    <div class="basket-stats">
+                        <div class="basket-stat">
+                            <span class="stat-icon">📦</span>
+                            <span class="stat-text">Позиций: <strong>{{ basket_items|length }}</strong></span>
+                        </div>
+                        <div class="basket-stat">
+                            <span class="stat-icon">🛒</span>
+                            <span class="stat-text">Товаров: <strong>{{ basket_items.values()|sum(attribute='quantity') }}</strong></span>
+                        </div>
+                    </div>
+                    
+                    <!-- Товары в корзине с фиксированной высотой -->
+                    <div class="basket-scroll-container">
+                        <div class="basket-items-grid">
+                            {% if basket_items %}
+                                {% for item in basket_items %}
+                                    {% include 'basket_item_card.html' %}
+                                {% endfor %}
+                            {% else %}
+                                <div class="empty-basket">
+                                    <p>Корзина пуста</p>
+                                    <span>🛒</span>
+                                    <p class="empty-hint">Добавьте товары из каталога</p>
+                                </div>
+                            {% endif %}
+                        </div>
+                    </div>
+                    
+                    <!-- Сводка и действия -->
+                    <div class="basket-summary">
+                        <div class="summary-stats">
+                            <div class="stat-item total">
+                                <span class="stat-label">💵 Общая сумма:</span>
+                                <span class="stat-value">
+                                    {{ total }} ₽
+                                </span>
+                            </div>
+                        </div>
+                        
+                        {% if basket_items %}
+                        <form method="POST" action="{{ url_for('bp_basket.basket_order_handler') }}">
+                            <button type="submit" class="btn-checkout">
+                                💳 Оформить заказ
+                            </button>
+                        </form>
+                        <form method="POST" action="{{ url_for('bp_basket.basket_clear_handler') }}">
+                            <button type="submit" class="btn-clear">
+                                🗑️ Очистить корзину
+                            </button>
+                        </form>
+                        {% else %}
+                        <button class="btn-checkout" disabled>💳 Оформить заказ</button>
+                        <button class="btn-clear" disabled>🗑️ Очистить корзину</button>
+                        {% endif %}
+                        <a href="{{ url_for('main_menu_handler') }}" class="btn-main">
+                            🏠 В главное меню
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</body>
+</html>

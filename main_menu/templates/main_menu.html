@@ -1,0 +1,20 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Главное меню</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/main.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Главное меню</h1>
+        
+        <div class="menu-column">
+            <a href="{{ url_for('bp_query.query_menu_handler') }}" class="menu-btn">Меню запросов</a>
+            <a href="{{ url_for('bp_report.report_menu_handler') }}" class="menu-btn reports-btn">Работа с отчётами</a>
+            <a href="{{ url_for('bp_basket.basket_main_handler') }}" class="menu-btn cart-btn">Корзина покупок</a>
+            <a href="{{ url_for('exit_handler') }}" class="menu-btn exit-btn">Завершить сессию</a>
+        </div>
+    </div>
+</body>
+</html>

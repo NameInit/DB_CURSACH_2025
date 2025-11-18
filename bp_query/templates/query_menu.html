@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <title>Меню запросов - Аптека</title>
+    <link rel="stylesheet" href="{{ url_for('bp_query.static', filename='css/query.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>📋 Меню запросов - Аптека</h1>
+        
+        <div class="queries-grid">
+            <div class="query-card">
+                <h3>📊 Заказы</h3>
+                <p>Подсчитать общее количество заказов для каждого лекарства</p>
+                <a href="{{ url_for('bp_query.query_form_handler', query_id=1) }}" class="btn btn-query">📈 Показать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>📊 Заказы</h3>
+                <p>Подсчитать общую сумму потраченных денег по каждому из поставщиков</p>
+                <a href="{{ url_for('bp_query.query_form_handler', query_id=2) }}" class="btn btn-query">📈 Показать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🏥 Поставщики</h3>
+                <p>Посмотреть сведения поставщика с самым дорогим лекарством</p>
+                <a href="{{ url_for('bp_query.query_form_handler', query_id=3) }}" class="btn btn-query">👥 Показать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🏥 Поставщики</h3>
+                <p>Посмотреть поставщиков без заказов за весь период</p>
+                <a href="{{ url_for('bp_query.query_form_handler', query_id=4) }}" class="btn btn-query">👥 Показать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🏥 Поставщики</h3>
+                <p>Посмотреть поставщиков без заказов в определнную дату</p>
+                <a href="{{ url_for('bp_query.query_form_handler', query_id=5) }}" class="btn btn-query">👥 Показать</a>
+            </div>
+
+            <div class="query-card">
+                <h3>🏥 Поставщики</h3>
+                <p>Посмотреть поставщика который поставил определнное лекарство чаще остальных</p>
+                <a href="{{ url_for('bp_query.query_form_handler', query_id=6) }}" class="btn btn-query">👥 Показать</a>
+            </div>
+        </div>
+                
+        <div class="action-buttons">
+            <a href="{{ url_for('main_menu_handler') }}" class="btn-back">
+                <span class="btn-icon">←</span>
+                <span class="btn-text">Назад в главное меню</span>
+            </a>
+        </div>
+    </div>
+</body>
+</html>

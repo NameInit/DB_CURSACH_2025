@@ -1,0 +1,86 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ввод параметров - Аналитика лекарств</title>
+    <link rel="stylesheet" href="{{ url_for('bp_query.static', filename='css/query.css') }}">
+</head>
+<body>
+    <div class="container">
+        <h1>Анализ данных о лекарствах - Запрос #{{ query_id }}</h1>
+        
+        <div class="form-container">
+            <div class="query-info">
+                <h3>Ввод параметров запроса</h3>
+                <p>Пожалуйста, укажите для получения аналитической информации</p>
+            </div>
+
+            <form class="query-form" id="medicineForm" method="POST" action="{{ url_for('bp_query.query_result_handler') }}">
+                {% if param_form[0] %}
+                <div class="form-group">
+                    <label for="year">Год *</label>
+                    <input type="number" 
+                           id="year" 
+                           name="year"
+                           class="form-input" 
+                           placeholder="Введите год (например: 2024)" 
+                           min="2000" 
+                           max="2030" 
+                           required>
+                    <div class="input-hint">Диапазон: 2000-2030</div>
+                </div>
+                {% endif %}
+
+                {% if param_form[1] %}
+                <div class="form-group">
+                    <label for="month">Месяц *</label>
+                    <select id="month" name="month" class="form-input" required>
+                        <option value="">Выберите месяц</option>
+                        <option value="1">Январь</option>
+                        <option value="2">Февраль</option>
+                        <option value="3">Март</option>
+                        <option value="4">Апрель</option>
+                        <option value="5">Май</option>
+                        <option value="6">Июнь</option>
+                        <option value="7">Июль</option>
+                        <option value="8">Август</option>
+                        <option value="9">Сентябрь</option>
+                        <option value="10">Октябрь</option>
+                        <option value="11">Ноябрь</option>
+                        <option value="12">Декабрь</option>
+                    </select>
+                </div>
+                {% endif %}
+
+                {% if param_form[2] %}
+                <div class="form-group">
+                    <label for="medicineId">ID лекарства *</label>
+                    <input type="text" 
+                           id="medicineId" 
+                           name="medicine_id"
+                           class="form-input" 
+                           placeholder="Введите идентификатор лекарства" 
+                           pattern="[A-Za-z0-9\-]+" 
+                           required>
+                    <div class="input-hint">Формат: буквы, цифры и дефисы</div>
+                </div>
+                {% endif %}
+
+                <input type="hidden" name="query_id" value="{{ query_id }}">
+
+                <div class="form-buttons">
+                    <button type="submit" class="btn btn-submit">
+                        <span class="btn-icon">📊</span>
+                        <span class="btn-text">Получить данные</span>
+                    </button>
+                    <a href="{{ url_for('bp_query.query_menu_handler') }}" class="btn btn-back-form">
+                        <span class="btn-icon">←</span>
+                        <span class="btn-text">Назад</span>
+                    </a>
+                </div>
+            </form>
+        </div>
+    </div>
+</body>
+</html>

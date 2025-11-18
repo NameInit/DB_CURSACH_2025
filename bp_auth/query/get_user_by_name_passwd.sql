@@ -1,0 +1,1 @@
+SELECT * FROM internal_user WHERE login=%s AND password=%s;

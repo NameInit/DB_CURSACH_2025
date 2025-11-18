@@ -1,0 +1,1 @@
+SELECT r.* FROM role r JOIN internal_user ui ON ui.r_id=r.r_id WHERE ui.login=%s;

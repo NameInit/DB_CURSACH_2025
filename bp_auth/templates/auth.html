@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="ru">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Авторизация</title>
+    <link rel="stylesheet" href="{{ url_for('bp_auth.static', filename='css/auth.css') }}">
+</head>
+<body>
+    <div class="menu-container">
+        <h1>Авторизация</h1>
+        
+        {% if error %}
+        <div class="error-message">
+            {{ error }}
+        </div>
+        {% endif %}
+        
+        <form method="POST" action="{{ url_for('bp_auth.auth_handler') }}">
+            <div class="form-group">
+                <label for="login">Логин:</label>
+                <input type="text" id="login" name="login" value="{{ login or '' }}" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="password">Пароль:</label>
+                <input type="password" id="password" name="password" required>
+            </div>
+            
+            <div class="checkbox-group">
+                <input type="checkbox" id="register" name="register" value="true" 
+                       {% if register %}checked{% endif %}>
+                <label for="register">Зарегистрировать новый аккаунт</label>
+            </div>
+
+            <div class="checkbox-group">
+                <input type="checkbox" id="external" name="external" value="true" 
+                       {% if external %}checked{% endif %}>
+                <label for="external">Я покупатель</label>
+            </div>
+
+            <button type="submit" class="menu-btn" id="submit-btn">Войти</button>
+        </form>
+
+        <a href="{{ url_for('bp_auth.exit_handler') }}" class="menu-btn exit-btn">Выйти</a>
+    </div>
+
+    <script>
+        document.getElementById('register').addEventListener('change', function() {
+            const submitButton = document.getElementById('submit-btn'); // Теперь найдет кнопку!
+            if (this.checked) {
+                submitButton.textContent = 'Зарегистрироваться';
+                submitButton.className = 'menu-btn register-btn';
+            } else {
+                submitButton.textContent = 'Войти';
+                submitButton.className = 'menu-btn';
+            }
+        });
+    </script>
+</body>
+</html>

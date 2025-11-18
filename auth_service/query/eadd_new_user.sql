@@ -1,0 +1,1 @@
+INSERT INTO external_user (login, password) VALUES (%s,%s);
