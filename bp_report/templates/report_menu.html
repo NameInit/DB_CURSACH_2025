@@ -13,8 +13,8 @@
                 <h3>🗂️ Отчёт1</h3>
                 <p>Описание1</p>
                 <div class="btn-group">
-                    <a href="{{ url_for('bp_report.report_form_handler', report_id=1, action='create') }}" class="btn btn-query">✏️ Создать</a>
-                    <a href="{{ url_for('bp_report.report_form_handler', report_id=1, action='view') }}" class="btn btn-query">👁️ Посмотреть</a>
+                    <a href="{{ url_for('bp_report.report_form_create_handler', report_id=1) }}" class="btn btn-query">✏️ Создать</a>
+                    <a href="{{ url_for('bp_report.report_form_view_handler', report_id=1) }}" class="btn btn-query">👁️ Посмотреть</a>
                 </div>
             </div>
         </div>

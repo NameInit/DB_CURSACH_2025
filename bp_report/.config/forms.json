@@ -1,0 +1,8 @@
+{
+    "param_form": {
+        "1": ["Year", "Month"]
+    },
+    "res_title" : {
+        "1": ["ID", "Month", "Year", "Amount", "Count"]
+    }
+}
