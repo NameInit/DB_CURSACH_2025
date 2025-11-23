@@ -38,4 +38,5 @@ def report_result_handler(report_id, action):
                               report_id=report_id, 
                               title=title, 
                               result=res.result)
-    return "Not found"
+    
+    return "Not found: unkwon action"

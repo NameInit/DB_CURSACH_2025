@@ -22,7 +22,6 @@ def auth_handler():
         return render_template('auth.html', error=response.json().get('err_message', "Unkwon Error"))
 
     session['id']=response.json()['data'].get('id', None)
-    session['r_id']=response.json()['data'].get('r_id', None)
     session['user_group']=response.json()['data'].get('user_group', None)
     session['db_config']=response.json()['data'].get('db_config', None)
     return redirect(url_for('main_menu_handler'))

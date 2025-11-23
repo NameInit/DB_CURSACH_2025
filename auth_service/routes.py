@@ -18,8 +18,7 @@ def external_login():
 	data=dict()
 	if res.status:
 		data={
-			'id': res.result[0][0], 
-			'r_id': 4, 
+			'id': res.result[0][0],
 			'user_group': "user",
 			'db_config': {'host': 'localhost', 'database': 'pharmacy', 'user': 'postgres', 'password': 'admin', 'port': 5432}
 		}
@@ -45,7 +44,6 @@ def external_register():
 	if res.status:
 		data={
 			'id': res.result[0][0],
-			'r_id': 4,
 			'user_group': "user",
 			'db_config': {'host': 'localhost', 'database': 'pharmacy', 'user': 'postgres', 'password': 'admin', 'port': 5432}
 		}
@@ -64,8 +62,7 @@ def internal_login():
 	data=dict()
 	if res.status:
 		data={
-			'id': res.result[0][0], 
-			'r_id': res.result[0][3], 
+			'id': res.result[0][0],
 			'user_group': res.result[0][4],
 			'db_config': res.result[0][5]
 		}
@@ -88,8 +85,7 @@ def internal_register():
 	model_route(provider,[login,password,4],'iadd_new_user', insert, db_config)
 	res = model_route(provider,[login,password],'iget_user_role_by_name_passwd', select, db_config)
 	data={
-		'id': res.result[0][0], 
-		'r_id': res.result[0][3], 
+		'id': res.result[0][0],
 		'user_group': res.result[0][4],
 		'db_config': res.result[0][5]
 	}
