@@ -1,6 +1,6 @@
 from flask import Blueprint
 from database.SQLprovider import SQLProvider
-import os, json, sys
+import os, json
 
 bp_report = Blueprint('bp_report', __name__, 
 			template_folder='./templates',

@@ -1,4 +1,4 @@
-from flask import render_template, request, redirect, url_for
+from flask import render_template, request, redirect, url_for, session
 from validators.decorator import group_required
 from . import bp_query, provider, forms
 from model.model_route import model_route
@@ -26,7 +26,7 @@ def query_form_handler(query_id):
 def query_result_handler():
     params = list(request.form.values())
     query_id = int(request.args.get('query_id')) if request.args.get('query_id') is not None else int(params.pop())
-    res=model_route(provider,params,'query'+str(query_id),select)
+    res=model_route(provider,params,'query'+str(query_id),select,session['db_config'])
     return render_template("query_results.html", 
 						   query_id=query_id, 
 						   title=forms["titles"][str(query_id)], 

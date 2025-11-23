@@ -8,7 +8,7 @@ from . import bp_basket, provider
 @bp_basket.route('/')
 @group_required
 def basket_main_handler():
-	res=redis_cache(model_route)(provider, [], 'get_products', select_dict)
+	res=redis_cache(model_route)(provider, [], 'get_products', select_dict, session['db_config'])
 	basket_items=session.get('basket') or {}
 	total = sum(float(item['price'])*int(item['quantity']) for item in basket_items.values())
 	return render_template('basket_main.html', 
@@ -19,7 +19,7 @@ def basket_main_handler():
 @bp_basket.route('/add/<int:product_id>', methods=['POST'])
 @group_required
 def basket_add_handler(product_id):
-	res=model_route(provider, [product_id], 'get_product_by_id', select_dict)
+	res=model_route(provider, [product_id], 'get_product_by_id', select_dict, session['db_config'])
 	if not res.status:
 		return redirect(url_for('bp_basket.basket_main_handler'))
 	product = res.result[0]
@@ -80,14 +80,14 @@ def basket_order_handler():
 	if not basket:
 		return redirect(url_for('bp_basket.basket_main_handler'))
 
-	order_id = model_route(provider, [session['id']], 'insert_user_order', insert).result
+	order_id = model_route(provider, [session['id']], 'insert_user_order', insert, session['db_config']).result
 	operation = list()
 	params = list()
 	for product_id in basket:
 		operation.append('insert_user_list_order')
 		params.append([basket[str(product_id)]['price']*basket[str(product_id)]['quantity'],order_id,product_id])
 
-	model_route(provider,params,operation,tranzakt)
+	model_route(provider,params,operation,tranzakt, session['db_config'])
 
 	session['basket'] = dict()
 	session.modified = True

@@ -1,9 +1,6 @@
 from flask import render_template, request, redirect, url_for, session
-from model.model_route import model_route
-from database.DBoperation import select, insert
-from validators.str import cleaner
 import requests
-from . import bp_auth, provider
+from . import bp_auth
 
 
 @bp_auth.route('/', methods=['GET', 'POST'])
@@ -18,7 +15,7 @@ def auth_handler():
         'login': request.form.get('login', ''), 
         'password': request.form.get('password', '')
     }
-
+    
     response=requests.post(url, json=data_dict)
 
     if not response.json().get('success', False):

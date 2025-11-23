@@ -1,34 +1,33 @@
 from .DBcm import DBContextManager
-from flask import current_app, session
 from . import message_to_bool
 
 
-def select(sql:str, param_list:list=[])->list[tuple]:
-	with DBContextManager(current_app.config['db_config']) as cursor:
+def select(sql:str, param_list:list=[], db_config: dict= {})->list[tuple]:
+	with DBContextManager(db_config) as cursor:
 		if cursor is None:
 			raise ValueError('Не могу подключиться к базе данных')
 		else:
 			cursor.execute(sql, param_list)
 			return cursor.fetchall()
 
-def insert(sql:str, param_list:list=[])->bool:
-	with DBContextManager(current_app.config['db_config']) as cursor:
+def insert(sql:str, param_list:list=[], db_config: dict= {})->bool:
+	with DBContextManager(db_config) as cursor:
 		if cursor is None:
 			raise ValueError('Не могу подключиться к базе данных')
 		else:
 			cursor.execute(sql, param_list)
 			return cursor.fetchone()[0] if cursor.description else True #аналог cursor.lastrowid
 		
-def call(sql:str, param_list:list=[]) -> bool:
-	with DBContextManager(current_app.config['db_config']) as cursor:
+def call(sql:str, param_list:list=[], db_config: dict= {}) -> bool:
+	with DBContextManager(db_config) as cursor:
 		if cursor is None:
 			raise ValueError('Не могу подключиться к базе данных')
 		else:
 			cursor.execute(sql, param_list)
 			return message_to_bool(cursor.connection.notices[0].strip(), 'SUCCESS')
 		
-def select_dict(sql:str, param_list:list=[]) -> list[dict]:
-	with DBContextManager(current_app.config['db_config']) as cursor:
+def select_dict(sql:str, param_list:list=[], db_config: dict= {}) -> list[dict]:
+	with DBContextManager(db_config) as cursor:
 		if cursor is None:
 			raise ValueError('Не могу подключиться к базе данных')
 		else:
@@ -43,8 +42,8 @@ def select_dict(sql:str, param_list:list=[]) -> list[dict]:
 
 			return results
 
-def tranzakt(list_sql:list[str], list_param_list:list[list]=[])->bool:
-	with DBContextManager(current_app.config['db_config']) as cursor:
+def tranzakt(list_sql:list[str], list_param_list:list[list]=[], db_config: dict= {})->bool:
+	with DBContextManager(db_config) as cursor:
 		if cursor is None:
 			raise ValueError('Не могу подключиться к базе данных')
 		else:

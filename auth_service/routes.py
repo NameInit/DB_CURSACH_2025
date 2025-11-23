@@ -13,7 +13,8 @@ def check():
 def external_login():
 	login=cleaner(request.json['login'])
 	password=cleaner(request.json['password'])
-	res=model_route(provider, [login, password], 'eget_user_by_name_passwd', select)
+	db_config = service_auth.config['db_config']
+	res=model_route(provider, [login, password], 'eget_user_by_name_passwd', select, db_config)
 	data=dict()
 	if res.status:
 		data={
@@ -31,13 +32,14 @@ def external_login():
 def external_register():
 	login=cleaner(request.json['login'])
 	password=cleaner(request.json['password'])
-	res=model_route(provider, [login], 'eget_user_by_name', select)
+	db_config = service_auth.config['db_config']
+	res=model_route(provider, [login], 'eget_user_by_name', select, db_config)
 
 	if res.status:
 		return jsonify({'success': False, 'err_message': "Логин занят", 'data': {}}), 401
 	
-	model_route(provider, [login,password], 'eadd_new_user', insert)
-	res=model_route(provider, [login,password], 'eget_user_by_name_passwd', select)
+	model_route(provider, [login,password], 'eadd_new_user', insert, db_config)
+	res=model_route(provider, [login,password], 'eget_user_by_name_passwd', select, db_config)
 
 	data=dict()
 	if res.status:
@@ -57,7 +59,8 @@ def external_register():
 def internal_login():
 	login=cleaner(request.json['login'])
 	password=cleaner(request.json['password'])
-	res=model_route(provider, [login, password], 'iget_user_role_by_name_passwd', select)
+	db_config = service_auth.config['db_config']
+	res=model_route(provider, [login, password], 'iget_user_role_by_name_passwd', select, db_config)
 	data=dict()
 	if res.status:
 		data={
@@ -74,16 +77,16 @@ def internal_login():
 
 @service_auth.route('/api/internal/register', methods=['POST'])
 def internal_register():
-	print("handler API /api/internal/register")
 	login=cleaner(request.json['login'])
 	password=cleaner(request.json['password'])
-	res = model_route(provider, [login], 'iget_user_by_name', select)
+	db_config = service_auth.config['db_config']
+	res = model_route(provider, [login], 'iget_user_by_name', select, db_config)
 
 	if res.status:
 		return jsonify({'success': False, 'err_message': "Логин занят", 'data': {}}), 401
 	data=dict()
-	model_route(provider,[login,password,4],'iadd_new_user',operator=insert)
-	res = model_route(provider,[login,password],'iget_user_role_by_name_passwd',select)
+	model_route(provider,[login,password,4],'iadd_new_user', insert, db_config)
+	res = model_route(provider,[login,password],'iget_user_role_by_name_passwd', select, db_config)
 	data={
 		'id': res.result[0][0], 
 		'r_id': res.result[0][3], 

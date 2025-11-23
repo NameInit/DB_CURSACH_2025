@@ -1,6 +1,6 @@
-from flask import render_template, request
+from flask import render_template, request, session
 from model.model_route import model_route
-from database.DBoperation import select,insert,call
+from database.DBoperation import select,call
 from validators.decorator import group_required
 from . import bp_report, provider, forms
 
@@ -29,11 +29,11 @@ def report_result_handler(report_id, action):
     params.pop()
     
     if action == 'create':
-        res = model_route(provider, params, 'report' + str(report_id), call)
+        res = model_route(provider, params, 'report' + str(report_id), call, session['db_config'])
         return render_template("report_message.html", success=res.status)
     elif action == 'view':
         title = forms["res_title"][str(report_id)]
-        res = model_route(provider, params, 'get_report', select)
+        res = model_route(provider, params, 'get_report', select, session['db_config'])
         return render_template("report_results.html", 
                               report_id=report_id, 
                               title=title, 
