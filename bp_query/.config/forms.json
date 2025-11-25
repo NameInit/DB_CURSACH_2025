@@ -1,11 +1,11 @@
 {
   "param_form": {
-    "1": [1, 1, 0],
-    "2": [1, 1, 0],
-    "3": [1, 1, 1],
-    "4": [0, 0, 0],
-    "5": [1, 1, 0],
-    "6": [1, 0, 1]
+    "1": ["Year", "Month"],
+    "2": ["Year", "Month"],
+    "3": ["Year", "Month", "MedicineID"],
+    "4": [],
+    "5": ["Year", "Month"],
+    "6": ["Year", "MedicineID"]
   },
   "titles": {
     "1": ["ID", "MedicineName", "Count"],

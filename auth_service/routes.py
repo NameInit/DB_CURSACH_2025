@@ -19,8 +19,8 @@ def external_login():
 	if res.status:
 		data={
 			'id': res.result[0][0],
-			'user_group': "user",
-			'db_config': {'host': 'localhost', 'database': 'pharmacy', 'user': 'postgres', 'password': 'admin', 'port': 5432}
+			'user_group': service_auth.config['external']['user_group'],
+			'db_config': service_auth.config['external']['db_config']
 		}
 	return jsonify({
 		'success': res.status, 
@@ -44,8 +44,8 @@ def external_register():
 	if res.status:
 		data={
 			'id': res.result[0][0],
-			'user_group': "user",
-			'db_config': {'host': 'localhost', 'database': 'pharmacy', 'user': 'postgres', 'password': 'admin', 'port': 5432}
+			'user_group': service_auth.config['external']['user_group'],
+			'db_config': service_auth.config['external']['db_config']
 		}
 
 	return jsonify({

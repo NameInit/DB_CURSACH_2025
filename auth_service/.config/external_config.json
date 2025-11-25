@@ -1,0 +1,1 @@
+{"user_group": "user", "db_config": {"host": "localhost", "database": "user_pharmacy", "user": "postgres", "password": "admin", "port": 5432}}

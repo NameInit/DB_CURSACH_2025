@@ -17,55 +17,63 @@
             </div>
 
             <form class="query-form" id="medicineForm" method="POST" action="{{ url_for('bp_query.query_result_handler') }}">
-                {% if param_form[0] %}
-                <div class="form-group">
-                    <label for="year">Год *</label>
-                    <input type="number" 
-                           id="year" 
-                           name="year"
-                           class="form-input" 
-                           placeholder="Введите год (например: 2024)" 
-                           min="2000" 
-                           max="2030" 
-                           required>
-                    <div class="input-hint">Диапазон: 2000-2030</div>
-                </div>
-                {% endif %}
-
-                {% if param_form[1] %}
-                <div class="form-group">
-                    <label for="month">Месяц *</label>
-                    <select id="month" name="month" class="form-input" required>
-                        <option value="">Выберите месяц</option>
-                        <option value="1">Январь</option>
-                        <option value="2">Февраль</option>
-                        <option value="3">Март</option>
-                        <option value="4">Апрель</option>
-                        <option value="5">Май</option>
-                        <option value="6">Июнь</option>
-                        <option value="7">Июль</option>
-                        <option value="8">Август</option>
-                        <option value="9">Сентябрь</option>
-                        <option value="10">Октябрь</option>
-                        <option value="11">Ноябрь</option>
-                        <option value="12">Декабрь</option>
-                    </select>
-                </div>
-                {% endif %}
-
-                {% if param_form[2] %}
-                <div class="form-group">
-                    <label for="medicineId">ID лекарства *</label>
-                    <input type="text" 
-                           id="medicineId" 
-                           name="medicine_id"
-                           class="form-input" 
-                           placeholder="Введите идентификатор лекарства" 
-                           pattern="[A-Za-z0-9\-]+" 
-                           required>
-                    <div class="input-hint">Формат: буквы, цифры и дефисы</div>
-                </div>
-                {% endif %}
+                {% for field in param_form %}
+                    {% if field == "Year" %}
+                    <div class="form-group">
+                        <label for="year">Год *</label>
+                        <input type="number" 
+                               id="year" 
+                               name="year"
+                               class="form-input" 
+                               placeholder="Введите год (например: 2024)" 
+                               min="2000" 
+                               max="2030" 
+                               required>
+                        <div class="input-hint">Диапазон: 2000-2030</div>
+                    </div>
+                    {% elif field == "Month" %}
+                    <div class="form-group">
+                        <label for="month">Месяц *</label>
+                        <select id="month" name="month" class="form-input" required>
+                            <option value="">Выберите месяц</option>
+                            <option value="1">Январь</option>
+                            <option value="2">Февраль</option>
+                            <option value="3">Март</option>
+                            <option value="4">Апрель</option>
+                            <option value="5">Май</option>
+                            <option value="6">Июнь</option>
+                            <option value="7">Июль</option>
+                            <option value="8">Август</option>
+                            <option value="9">Сентябрь</option>
+                            <option value="10">Октябрь</option>
+                            <option value="11">Ноябрь</option>
+                            <option value="12">Декабрь</option>
+                        </select>
+                    </div>
+                    {% elif field == "MedicineID" %}
+                    <div class="form-group">
+                        <label for="medicine_id">ID лекарства *</label>
+                        <input type="text" 
+                               id="medicine_id" 
+                               name="medicine_id"
+                               class="form-input" 
+                               placeholder="Введите идентификатор лекарства" 
+                               pattern="[A-Za-z0-9\-]+" 
+                               required>
+                        <div class="input-hint">Формат: буквы, цифры и дефисы</div>
+                    </div>
+                    {% else %}
+                    <div class="form-group">
+                        <label for="{{ field|lower }}">{{ field }} *</label>
+                        <input type="text" 
+                               id="{{ field|lower }}" 
+                               name="{{ field|lower }}"
+                               class="form-input" 
+                               placeholder="Введите {{ field }}" 
+                               required>
+                    </div>
+                    {% endif %}
+                {% endfor %}
 
                 <input type="hidden" name="query_id" value="{{ query_id }}">
 

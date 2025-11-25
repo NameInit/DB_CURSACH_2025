@@ -14,8 +14,8 @@ def query_menu_handler():
 
 @bp_query.route('/<int:query_id>', methods=['GET'])
 @group_required
-def query_form_handler(query_id):    
-    if forms["param_form"][str(query_id)].count(0) == len(forms["param_form"][str(query_id)]):
+def query_form_handler(query_id):
+    if not forms["param_form"][str(query_id)]:
         return redirect(url_for('bp_query.query_result_handler', query_id=query_id))
     return render_template("query_input_form.html", 
                          param_form=forms["param_form"][str(query_id)],
