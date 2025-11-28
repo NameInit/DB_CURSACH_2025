@@ -18,6 +18,7 @@ def group_required(func):
 			bp_name,handler_name=request.endpoint.split('.')
 			access=current_app.config['bp_access']
 			user_role=session.get('user_group')
+			# print(user_role,access,user_role in access,sep='\n')
 			if user_role in access and bp_name in access[user_role] and (handler_name in access[user_role][bp_name] or access[user_role][bp_name]=='*'):
 				return func(*args, **kwargs)
 			else:
