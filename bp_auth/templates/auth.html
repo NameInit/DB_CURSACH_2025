@@ -17,6 +17,19 @@
         {% endif %}
         
         <form method="POST" action="{{ url_for('bp_auth.auth_handler') }}">
+            
+            <!-- СЛАЙДЕР: Сотрудник / Покупатель -->
+            <div class="toggle-wrapper">
+                <input type="checkbox" id="external" name="external" value="true" class="toggle-input"
+                       {% if external %}checked{% endif %}>
+                
+                <label for="external" class="toggle-label">
+                    <span class="toggle-text text-left">Сотрудник</span>
+                    <span class="toggle-text text-right">Покупатель</span>
+                    <div class="toggle-ball"></div>
+                </label>
+            </div>
+
             <div class="form-group">
                 <label for="login">Логин:</label>
                 <input type="text" id="login" name="login" value="{{ login or '' }}" required>
@@ -27,16 +40,11 @@
                 <input type="password" id="password" name="password" required>
             </div>
             
-            <div class="checkbox-group">
+            <!-- Чекбокс "Зарегистрироваться" -->
+            <div class="checkbox-group" id="register-wrapper">
                 <input type="checkbox" id="register" name="register" value="true" 
                        {% if register %}checked{% endif %}>
                 <label for="register">Зарегистрировать новый аккаунт</label>
-            </div>
-
-            <div class="checkbox-group">
-                <input type="checkbox" id="external" name="external" value="true" 
-                       {% if external %}checked{% endif %}>
-                <label for="external">Я покупатель</label>
             </div>
 
             <button type="submit" class="menu-btn" id="submit-btn">Войти</button>
@@ -46,15 +54,33 @@
     </div>
 
     <script>
-        document.getElementById('register').addEventListener('change', function() {
-            const submitButton = document.getElementById('submit-btn'); // Теперь найдет кнопку!
-            if (this.checked) {
-                submitButton.textContent = 'Зарегистрироваться';
-                submitButton.className = 'menu-btn register-btn';
-            } else {
-                submitButton.textContent = 'Войти';
-                submitButton.className = 'menu-btn';
+        document.addEventListener('DOMContentLoaded', function() {
+            const externalCheckbox = document.getElementById('external');
+            const registerWrapper = document.getElementById('register-wrapper');
+            const registerCheckbox = document.getElementById('register');
+            const submitButton = document.getElementById('submit-btn');
+
+            function updateInterface() {
+                if (externalCheckbox.checked) {
+                    // --- Состояние: ПОКУПАТЕЛЬ ---
+                    registerWrapper.classList.remove('hidden');
+                    
+                    submitButton.textContent = 'За покупками';
+                    submitButton.className = 'menu-btn';
+                } else {
+                    // --- Состояние: СОТРУДНИК ---
+                    registerWrapper.classList.add('hidden');
+                    registerCheckbox.checked = false;
+                    
+                    submitButton.textContent = 'Войти';
+                    submitButton.className = 'menu-btn';
+                }
             }
+
+            externalCheckbox.addEventListener('change', updateInterface);
+            registerCheckbox.addEventListener('change', updateInterface);
+            
+            updateInterface();
         });
     </script>
 </body>
