@@ -1,7 +1,7 @@
 from flask import jsonify, request
-from validators.str import cleaner
-from model.model_route import model_route
-from database.DBoperation import select, insert
+from .validators.str import cleaner
+from .model.model_route import model_route
+from .database.DBoperation import select, insert
 from . import service_auth, provider
 
 @service_auth.route('/api/health', methods=['GET'])
