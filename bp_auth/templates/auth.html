@@ -18,7 +18,6 @@
         
         <form method="POST" action="{{ url_for('bp_auth.auth_handler') }}">
             
-            <!-- СЛАЙДЕР: Сотрудник / Покупатель -->
             <div class="toggle-wrapper">
                 <input type="checkbox" id="external" name="external" value="true" class="toggle-input"
                        {% if external %}checked{% endif %}>
@@ -40,7 +39,6 @@
                 <input type="password" id="password" name="password" required>
             </div>
             
-            <!-- Чекбокс "Зарегистрироваться" -->
             <div class="checkbox-group" id="register-wrapper">
                 <input type="checkbox" id="register" name="register" value="true" 
                        {% if register %}checked{% endif %}>
@@ -65,8 +63,13 @@
                     // --- Состояние: ПОКУПАТЕЛЬ ---
                     registerWrapper.classList.remove('hidden');
                     
-                    submitButton.textContent = 'За покупками';
-                    submitButton.className = 'menu-btn';
+                    if (registerCheckbox.checked) {
+                        submitButton.textContent = 'Зарегистрироваться';
+                        submitButton.className = 'menu-btn register-btn';
+                    } else {
+                        submitButton.textContent = 'Войти';
+                        submitButton.className = 'menu-btn';
+                    }
                 } else {
                     // --- Состояние: СОТРУДНИК ---
                     registerWrapper.classList.add('hidden');
