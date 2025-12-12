@@ -1,1 +1,0 @@
-INSERT INTO internal_user (login, password, r_id) VALUES (%s,%s,%s);

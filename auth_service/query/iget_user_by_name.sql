@@ -1,1 +1,0 @@
-SELECT * FROM internal_user WHERE login=%s;
